@@ -1,5 +1,13 @@
 const cart = require('../src/cart');
 
+beforeEach(() => {
+  // Reset module-level cart state before every test so no
+  // items left by a previous test can contaminate this one.
+  while (cart.getCart().length > 0) {
+    cart.getCart().pop();
+  }
+});
+
 test('addItem adds to cart', () => {
   cart.addItem({ id: 1, name: 'Widget' });
   expect(cart.getCart().length).toBe(1);
